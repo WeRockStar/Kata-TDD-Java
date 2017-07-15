@@ -21,14 +21,14 @@ public class TemplateTest {
 
     @Test(expected = MissingValueException.class)
     public void missing_value_should_raises_exception() throws Exception {
-        new Template("${foo}").getEvaluate();
+        new Template("${foo}").evaluate();
     }
 
     @Test
     public void unknown_variable_should_ignored() throws Exception {
         template.set("unknown", "ignored");
 
-        String actualEvaluate = template.getEvaluate();
+        String actualEvaluate = template.evaluate();
 
         assertEquals("1, 2, 3", actualEvaluate);
     }
@@ -39,14 +39,14 @@ public class TemplateTest {
         template.set("name", "WeRockStar");
         template.set("unknown", "ignored");
 
-        String actualEvaluate = template.getEvaluate();
+        String actualEvaluate = template.evaluate();
 
         assertEquals("Hello, WeRockStar", actualEvaluate);
     }
 
     @Test
-    public void add_multiple_variable() throws Exception {
-        String actualEvaluate = template.getEvaluate();
+    public void add_multiple_variable_should_see_variable_multiple_display() throws Exception {
+        String actualEvaluate = template.evaluate();
 
         assertEquals("1, 2, 3", actualEvaluate);
     }

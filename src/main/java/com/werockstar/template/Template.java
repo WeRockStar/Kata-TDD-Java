@@ -17,15 +17,24 @@ public class Template {
         this.variables.put(name, value);
     }
 
-    public String getEvaluate() {
+    public String evaluate() {
+        String result = replaceVariable();
+        checkMissingValue(result);
+        return result;
+    }
+
+    private String replaceVariable() {
         String result = template;
         for (Map.Entry<String, String> entry : variables.entrySet()) {
             String regex = "\\$\\{" + entry.getKey() + "\\}";
             result = result.replaceAll(regex, entry.getValue());
         }
+        return result;
+    }
+
+    private void checkMissingValue(String result) {
         if(result.matches(".*\\$\\{.+\\}.*")) {
             throw new MissingValueException();
         }
-        return result;
     }
 }
