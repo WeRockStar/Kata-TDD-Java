@@ -19,8 +19,6 @@
 *.zip
 *.tar.gz
 *.rar
-/.idea/*
-/.gradle/*
 /.idea
 /.gradle
 
