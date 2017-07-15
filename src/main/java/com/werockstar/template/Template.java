@@ -2,6 +2,8 @@ package com.werockstar.template;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Template {
 
@@ -24,16 +26,17 @@ public class Template {
     }
 
     private String replaceVariable() {
-        String result = template;
+        String resultTemplate = template;
         for (Map.Entry<String, String> entry : variables.entrySet()) {
             String regex = "\\$\\{" + entry.getKey() + "\\}";
-            result = result.replaceAll(regex, entry.getValue());
+            resultTemplate = resultTemplate.replaceAll(regex, entry.getValue());
         }
-        return result;
+        return resultTemplate;
     }
 
-    private void checkMissingValue(String result) {
-        if(result.matches(".*\\$\\{.+\\}.*")) {
+    private void checkMissingValue(String resultTemplate) {
+        Matcher matcher = Pattern.compile(".*\\$\\{.+\\}.*").matcher(resultTemplate);
+        if (matcher.find()) {
             throw new MissingValueException();
         }
     }
