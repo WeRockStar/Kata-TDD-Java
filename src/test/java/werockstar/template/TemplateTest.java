@@ -21,7 +21,10 @@ public class TemplateTest {
     @Test
     public void unknown_variable_should_ignored() throws Exception {
         template.set("unknown", "ignored");
-        assertEquals("1, 2, 3", template.getEvaluate());
+
+        String actualEvaluate = template.getEvaluate();
+
+        assertEquals("1, 2, 3", actualEvaluate);
     }
 
     @Test
@@ -29,11 +32,16 @@ public class TemplateTest {
         template = new Template("Hello, ${name}");
         template.set("name", "WeRockStar");
         template.set("unknown", "ignored");
-        assertEquals("Hello, WeRockStar", template.getEvaluate());
+
+        String actualEvaluate = template.getEvaluate();
+
+        assertEquals("Hello, WeRockStar", actualEvaluate);
     }
 
     @Test
     public void add_multiple_variable() throws Exception {
-        assertEquals("1, 2, 3", template.getEvaluate());
+        String actualEvaluate = template.getEvaluate();
+
+        assertEquals("1, 2, 3", actualEvaluate);
     }
 }
