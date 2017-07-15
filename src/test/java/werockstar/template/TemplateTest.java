@@ -8,6 +8,14 @@ import static org.junit.Assert.assertEquals;
 public class TemplateTest {
 
     @Test
+    public void unknown_variable_should_ignored() throws Exception {
+        Template template = new Template("Hello, ${name}");
+        template.set("name", "WeRockStar");
+        template.set("unknown", "Any");
+        assertEquals("Hello, WeRockStar", template.getEvaluate());
+    }
+
+    @Test
     public void should_see_reader_be_Reader() throws Exception {
         Template template = new Template("Hello, ${name}");
         template.set("name", "Reader");
