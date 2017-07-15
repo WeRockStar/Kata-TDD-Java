@@ -1,19 +1,28 @@
 package com.werockstar.template;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Template {
 
-    private String value;
+    private Map<String, String> variables;
     private String template;
 
     public Template(String template) {
+        this.variables = new HashMap<>();
         this.template = template;
     }
 
-    public void set(String variable, String value) {
-        this.value = value;
+    public void set(String name, String value) {
+        this.variables.put(name, value);
     }
 
     public String getEvaluate() {
-        return template.replaceAll("\\$\\{name\\}", value);
+        String result = template;
+        for (Map.Entry<String, String> entry : variables.entrySet()) {
+            String regex = "\\$\\{" + entry.getKey() + "\\}";
+            result = result.replaceAll(regex, entry.getValue());
+        }
+        return result;
     }
 }

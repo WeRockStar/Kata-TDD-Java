@@ -27,4 +27,13 @@ public class TemplateTest {
         template.set("name", "WeRockStar");
         assertEquals("Hello, WeRockStar", template.getEvaluate());
     }
+
+    @Test
+    public void add_multiple_variable() throws Exception {
+        Template template = new Template("${one}, ${two}, ${three}");
+        template.set("one", "1");
+        template.set("two", "2");
+        template.set("three", "3");
+        assertEquals("1, 2, 3", template.getEvaluate());
+    }
 }
