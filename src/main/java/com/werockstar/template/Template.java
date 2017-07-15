@@ -3,8 +3,10 @@ package com.werockstar.template;
 public class Template {
 
     private String value;
+    private String template;
 
     public Template(String template) {
+        this.template = template;
     }
 
     public void set(String variable, String value) {
@@ -12,6 +14,6 @@ public class Template {
     }
 
     public String getEvaluate() {
-        return "Hello, " + value;
+        return template.replaceAll("\\$\\{name\\}", value);
     }
 }
