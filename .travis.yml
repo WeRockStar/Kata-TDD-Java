@@ -3,5 +3,6 @@ jdk: oraclejdk8
 sudo: false
 
 script:
-  - ./gradlew test
+  - ./gradlew build
+  - ./gradlew check
   - bash <(curl -s https://codecov.io/bash)
