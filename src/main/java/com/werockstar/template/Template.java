@@ -37,7 +37,7 @@ public class Template {
     private void checkMissingValue(String resultTemplate) {
         Matcher matcher = Pattern.compile(".*\\$\\{.+\\}.*").matcher(resultTemplate);
         if (matcher.find()) {
-            throw new MissingValueException();
+            throw new MissingValueException("No value for " + matcher.group());
         }
     }
 }
