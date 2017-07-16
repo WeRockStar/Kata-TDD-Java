@@ -1,5 +1,7 @@
 package werockstar.template;
 
+import java.util.Map;
+
 public class PlainText implements Segment {
     private String text;
 
@@ -12,4 +14,8 @@ public class PlainText implements Segment {
         return text.equals(((PlainText) o).text);
     }
 
+    @Override
+    public String evaluate(Map<String, String> variable) {
+        gs
+    }
 }
