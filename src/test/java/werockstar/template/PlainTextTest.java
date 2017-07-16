@@ -10,11 +10,11 @@ import static org.junit.Assert.*;
 public class PlainTextTest {
 
     @Test
-    public void plain_text_evaluate_as_in() throws Exception {
-        Map<String, String> variable = new HashMap<>();
+    public void plain_text_evaluate_as_is() throws Exception {
+        Map<String, String> variables = new HashMap<>();
 
         String text = "abc def";
 
-        assertEquals(text, new PlainText(text).evaluate(variable));
+        assertEquals(text, new PlainText(text).evaluate(variables));
     }
 }

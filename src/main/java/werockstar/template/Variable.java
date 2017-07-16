@@ -3,19 +3,19 @@ package werockstar.template;
 import java.util.Map;
 
 public class Variable implements Segment {
-    private String value;
+    private String name;
 
-    public Variable(String value) {
-        this.value = value;
+    public Variable(String name) {
+        this.name = name;
     }
 
     @Override
     public boolean equals(Object other) {
-        return value.equals(((Variable) other).value);
+        return name.equals(((Variable) other).name);
     }
 
     @Override
     public String evaluate(Map<String, String> variable) {
-        return null;
+        return variable.get(name);
     }
 }
