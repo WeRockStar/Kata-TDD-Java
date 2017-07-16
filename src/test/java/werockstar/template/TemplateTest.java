@@ -18,12 +18,13 @@ public class TemplateTest {
         template.set("three", "3");
     }
 
-    @Test @Ignore
+    @Test
     public void variable_get_processed_just_one() throws Exception {
         template.set("one", "${one}");
         template.set("two", "${two}");
+        template.set("three", "${three}");
 
-        assertEquals("${one}, ${three}, ${two}", template.evaluate());
+        assertEquals("${one}, ${two}, ${three}", template.evaluate());
     }
 
     @Test(expected = MissingValueException.class)

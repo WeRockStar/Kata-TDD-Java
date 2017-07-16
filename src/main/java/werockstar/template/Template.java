@@ -1,6 +1,7 @@
 package werockstar.template;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -20,24 +21,27 @@ public class Template {
     }
 
     public String evaluate() {
-        String result = replaceVariable();
-        checkMissingValue(result);
-        return result;
-    }
-
-    private String replaceVariable() {
-        String resultTemplate = template;
-        for (Map.Entry<String, String> entry : variables.entrySet()) {
-            String regex = "\\$\\{" + entry.getKey() + "\\}";
-            resultTemplate = resultTemplate.replaceAll(regex, entry.getValue());
+        TemplateParse parse = new TemplateParse();
+        List<String> segments = parse.parse(template);
+        StringBuilder builder = new StringBuilder();
+        for (String segment : segments) {
+            append(segment, builder);
         }
-        return resultTemplate;
+        return builder.toString();
     }
 
-    private void checkMissingValue(String resultTemplate) {
-        Matcher matcher = Pattern.compile(".*\\$\\{.+\\}.*").matcher(resultTemplate);
-        if (matcher.find()) {
-            throw new MissingValueException("No value for " + matcher.group());
+    private void append(String segment, StringBuilder builder) {
+        if (segment.startsWith("${") && segment.endsWith("}")) {
+            int beginIndexOfValue = 2;
+            int endIndexOfValue = segment.length() - 1;
+
+            String value = segment.substring(beginIndexOfValue, endIndexOfValue);
+            if (!variables.containsKey(value)) {
+                throw new MissingValueException("No value for " + segment);
+            }
+            builder.append(variables.get(value));
+        } else {
+            builder.append(segment);
         }
     }
 }
