@@ -1,8 +1,7 @@
 package werockstar.template;
 
-import com.werockstar.template.MissingValueException;
-import com.werockstar.template.Template;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -17,6 +16,14 @@ public class TemplateTest {
         template.set("one", "1");
         template.set("two", "2");
         template.set("three", "3");
+    }
+
+    @Test @Ignore
+    public void variable_get_processed_just_one() throws Exception {
+        template.set("one", "${one}");
+        template.set("two", "${two}");
+
+        assertEquals("${one}, ${three}, ${two}", template.evaluate());
     }
 
     @Test(expected = MissingValueException.class)

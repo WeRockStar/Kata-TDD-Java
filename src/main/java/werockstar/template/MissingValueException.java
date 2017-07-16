@@ -1,4 +1,4 @@
-package com.werockstar.template;
+package werockstar.template;
 
 public class MissingValueException extends RuntimeException {
 

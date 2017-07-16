@@ -1,4 +1,4 @@
-package com.werockstar.template;
+package werockstar.template;
 
 import java.util.HashMap;
 import java.util.Map;
