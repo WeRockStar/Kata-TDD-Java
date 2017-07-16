@@ -53,7 +53,7 @@ public class Template {
         builder.append(variables.get(value));
     }
 
-    private boolean isVariable(String segment) {
+    public static boolean isVariable(String segment) {
         return segment.startsWith("${") && segment.endsWith("}");
     }
 }

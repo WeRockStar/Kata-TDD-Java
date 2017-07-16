@@ -1,9 +1,6 @@
 package werockstar.template;
 
-import com.sun.org.apache.xerces.internal.impl.xpath.regex.Match;
-
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -50,5 +47,19 @@ public class TemplateParse {
 
     private void addVariable(List<String> segments, String src, Matcher matcher) {
         segments.add(src.substring(matcher.start(), matcher.end()));
+    }
+
+    public List<Segment> parseSegments(String template) {
+        List<Segment> segments = new ArrayList<>();
+        List<String> strings = parse(template);
+        for (String s : strings) {
+            if (Template.isVariable(s)) {
+                String valueOfName = s.substring(2, s.length() - 1);
+                segments.add(new Variable(valueOfName));
+            } else {
+                segments.add(new PlainText(s));
+            }
+        }
+        return segments;
     }
 }
