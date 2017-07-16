@@ -33,27 +33,4 @@ public class Template {
         }
         return builder.toString();
     }
-
-    private void append(String segment, StringBuilder builder) {
-        if (isVariable(segment)) {
-            evaluateVariable(segment, builder);
-        } else {
-            builder.append(segment);
-        }
-    }
-
-    private void evaluateVariable(String segment, StringBuilder builder) {
-        int beginIndexOfValue = 2;
-        int endIndexOfValue = segment.length() - 1;
-
-        String value = segment.substring(beginIndexOfValue, endIndexOfValue);
-        if (!variables.containsKey(value)) {
-            throw new MissingValueException("No value for " + segment);
-        }
-        builder.append(variables.get(value));
-    }
-
-    public static boolean isVariable(String segment) {
-        return segment.startsWith("${") && segment.endsWith("}");
-    }
 }

@@ -53,7 +53,7 @@ public class TemplateParse {
         List<Segment> segments = new ArrayList<>();
         List<String> strings = parse(template);
         for (String s : strings) {
-            if (Template.isVariable(s)) {
+            if (isVariable(s)) {
                 String valueOfName = s.substring(2, s.length() - 1);
                 segments.add(new Variable(valueOfName));
             } else {
@@ -61,5 +61,9 @@ public class TemplateParse {
             }
         }
         return segments;
+    }
+
+    private boolean isVariable(String segment) {
+        return segment.startsWith("${") && segment.endsWith("}");
     }
 }
