@@ -20,4 +20,10 @@ public class VariableTest {
 
         assertEquals(value, new Variable(name).evaluate(variables));
     }
+
+    @Test(expected = MissingValueException.class)
+    public void missing_variable_raises_exception() throws Exception {
+        String name = "My name";
+        new Variable(name).evaluate(new HashMap<>());
+    }
 }
