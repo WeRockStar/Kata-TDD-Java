@@ -23,6 +23,10 @@ public class Template {
     public String evaluate() {
         TemplateParse parse = new TemplateParse();
         List<String> segments = parse.parse(template);
+        return concatenate(segments);
+    }
+
+    private String concatenate(List<String> segments) {
         StringBuilder builder = new StringBuilder();
         for (String segment : segments) {
             append(segment, builder);
@@ -31,17 +35,25 @@ public class Template {
     }
 
     private void append(String segment, StringBuilder builder) {
-        if (segment.startsWith("${") && segment.endsWith("}")) {
-            int beginIndexOfValue = 2;
-            int endIndexOfValue = segment.length() - 1;
-
-            String value = segment.substring(beginIndexOfValue, endIndexOfValue);
-            if (!variables.containsKey(value)) {
-                throw new MissingValueException("No value for " + segment);
-            }
-            builder.append(variables.get(value));
+        if (isVariable(segment)) {
+            evaluateVariable(segment, builder);
         } else {
             builder.append(segment);
         }
+    }
+
+    private void evaluateVariable(String segment, StringBuilder builder) {
+        int beginIndexOfValue = 2;
+        int endIndexOfValue = segment.length() - 1;
+
+        String value = segment.substring(beginIndexOfValue, endIndexOfValue);
+        if (!variables.containsKey(value)) {
+            throw new MissingValueException("No value for " + segment);
+        }
+        builder.append(variables.get(value));
+    }
+
+    private boolean isVariable(String segment) {
+        return segment.startsWith("${") && segment.endsWith("}");
     }
 }
