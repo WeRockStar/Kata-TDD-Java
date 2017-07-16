@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class TemplateParseTest {
 
@@ -16,6 +17,12 @@ public class TemplateParseTest {
     private void assertSegments(List<? extends Object> actual, Object... expected) {
         assertEquals("Number of segments", expected.length, actual.size());
         assertEquals(Arrays.asList(expected), actual);
+    }
+
+    @Test
+    public void should_be_variable() throws Exception {
+        TemplateParse parse = new TemplateParse();
+        assertTrue(parse.isVariable("${name}"));
     }
 
     @Test
