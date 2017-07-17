@@ -20,11 +20,6 @@ public class PlainText implements Segment {
     }
 
     @Override
-    public int hashCode() {
-        return text.hashCode();
-    }
-
-    @Override
     public String evaluate(Map<String, String> variable) {
         return text;
     }
