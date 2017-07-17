@@ -10,8 +10,18 @@ public class Variable implements Segment {
     }
 
     @Override
-    public boolean equals(Object other) {
-        return name.equals(((Variable) other).name);
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Variable)) return false;
+
+        Variable variable = (Variable) o;
+
+        return name.equals(variable.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return name.hashCode();
     }
 
     @Override

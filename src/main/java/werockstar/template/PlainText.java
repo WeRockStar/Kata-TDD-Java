@@ -11,7 +11,17 @@ public class PlainText implements Segment {
 
     @Override
     public boolean equals(Object o) {
-        return text.equals(((PlainText) o).text);
+        if (this == o) return true;
+        if (!(o instanceof PlainText)) return false;
+
+        PlainText plainText = (PlainText) o;
+
+        return text.equals(plainText.text);
+    }
+
+    @Override
+    public int hashCode() {
+        return text.hashCode();
     }
 
     @Override
